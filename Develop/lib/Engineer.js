@@ -1,0 +1,10 @@
+// TODO: Write code to define and export the Engineer class.  HINT: This class should inherit from Employee.
+
+class Engineer extends Employee {
+    constructor(id, email, github) {
+      super(id, 4, "beep");
+      this.passengers = passengers;
+      this.color = color;
+    }
+  
+  }
