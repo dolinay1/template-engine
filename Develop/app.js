@@ -1,165 +1,165 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
-const inquirer = require("inquirer");
-const path = require("path");
-const fs = require("fs");
+// const Manager = require("./lib/Manager");
+// const Engineer = require("./lib/Engineer");
+// const Intern = require("./lib/Intern");
+// const inquirer = require("inquirer");
+// const path = require("path");
+// const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
-
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-
-const writeFileAsync = util.promisify(fs.writeFile);
-
-function promptUser() {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "github",
-      message: "Provide your Github username:"
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "Provide your email:"
-    },
-    {
-      type: "input",
-      name: "title",
-      message: "What is your project title? (Use hyphens to seperate each word.)"
-    },
-    {
-      type: "input",
-      name: "description",
-      message: "Describe your project:"
-    },
-    {
-      type: "input",
-      name: "installation",
-      message: "Describe what command the user must run to install dependencies:"
-    },
-    {
-      type: "input",
-      name: "tests",
-      message: "Describe what command the user must run to run tests:"
-    },
-    {
-      type: "list",
-      name: "license",
-      message: "Choose the license you would like to use:",
-      choices: ["MIT", "APACHE", "GPL"]
-    },
-    {
-      type: "input",
-      name: "contributing",
-      message: "Describe how the user may contribute to this repo:"
-    },
-    {
-      type: "input",
-      name: "usage",
-      message: "Describe what the user needs to know about using the repo:"
-    },
-    {
-      type: "input",
-      name: "picture",
-      message: "Add your github profile picture by pasting the url here. (Check your github public profile for the url):"
-    }
-  ]);
-}
-
-async function init() {
-  console.log("hi")
-  try {
-    const data = await promptUser();
-
-    const markdown = generateMarkdown(data);
-
-    await writeFileAsync("README.md", markdown);
-
-    console.log("Successfully wrote Readme");
-  } catch(err) {
-    console.log(err);
-  }
-}
-
-init();
-
-function generateMarkdown(data) {
-  return `
-
-# Project Title
-${data.title}
+// const render = require("./lib/htmlRenderer");
 
 
+// // Write code to use inquirer to gather information about the development team members,
+// // and to create objects for each team member (using the correct classes as blueprints!)
 
-## Table of Contents
+// const writeFileAsync = util.promisify(fs.writeFile);
 
-* [Description](#description)
+// function promptUser() {
+//   return inquirer.prompt([
+//     {
+//       type: "input",
+//       name: "github",
+//       message: "Provide your Github username:"
+//     },
+//     {
+//       type: "input",
+//       name: "email",
+//       message: "Provide your email:"
+//     },
+//     {
+//       type: "input",
+//       name: "title",
+//       message: "What is your project title? (Use hyphens to seperate each word.)"
+//     },
+//     {
+//       type: "input",
+//       name: "description",
+//       message: "Describe your project:"
+//     },
+//     {
+//       type: "input",
+//       name: "installation",
+//       message: "Describe what command the user must run to install dependencies:"
+//     },
+//     {
+//       type: "input",
+//       name: "tests",
+//       message: "Describe what command the user must run to run tests:"
+//     },
+//     {
+//       type: "list",
+//       name: "license",
+//       message: "Choose the license you would like to use:",
+//       choices: ["MIT", "APACHE", "GPL"]
+//     },
+//     {
+//       type: "input",
+//       name: "contributing",
+//       message: "Describe how the user may contribute to this repo:"
+//     },
+//     {
+//       type: "input",
+//       name: "usage",
+//       message: "Describe what the user needs to know about using the repo:"
+//     },
+//     {
+//       type: "input",
+//       name: "picture",
+//       message: "Add your github profile picture by pasting the url here. (Check your github public profile for the url):"
+//     }
+//   ]);
+// }
 
-* [Installation](#installation)
+// async function init() {
+//   console.log("hi")
+//   try {
+//     const data = await promptUser();
 
-* [Tests](#tests)
+//     const markdown = generateMarkdown(data);
 
-* [License](#license)
+//     await writeFileAsync("README.md", markdown);
 
-* [Contributing](#contributing)
+//     console.log("Successfully wrote Readme");
+//   } catch(err) {
+//     console.log(err);
+//   }
+// }
 
-* [Usage](#usage information)
+// init();
 
-* [Contact](#contact)
+// function generateMarkdown(data) {
+//   return `
+
+// # Project Title
+// ${data.title}
 
 
 
+// ## Table of Contents
 
-# Description
-${data.description}
+// * [Description](#description)
 
+// * [Installation](#installation)
 
+// * [Tests](#tests)
 
-# Installation
-To install all dependencies run: ${data.installation}.
+// * [License](#license)
 
+// * [Contributing](#contributing)
 
+// * [Usage](#usage information)
 
-# Tests
-
-To run tests for repository run: ${data.tests}.
-
-
-
-# License
-This repository uses a ${data.license} license.
+// * [Contact](#contact)
 
 
 
-# Contributing
-${data.contributing}
+
+// # Description
+// ${data.description}
 
 
 
-# Usage
-${data.usage}
+// # Installation
+// To install all dependencies run: ${data.installation}.
 
 
 
-# Contact
-Questions about the repo or project? Contact at	https://github.com/${data.github} or directly by email at ${data.email}.
+// # Tests
 
-[![GitHub followers](https://img.shields.io/github/followers/${data.github}?style=social)](https://github.com/${data.github})
+// To run tests for repository run: ${data.tests}.
 
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/${data.github}/${data.title})](https://github.com/${data.github}/${data.title}/commits/master)
 
-![Profile_pic](${data.picture})
 
-`;
-}
+// # License
+// This repository uses a ${data.license} license.
 
-module.exports = generateMarkdown;
+
+
+// # Contributing
+// ${data.contributing}
+
+
+
+// # Usage
+// ${data.usage}
+
+
+
+// # Contact
+// Questions about the repo or project? Contact at	https://github.com/${data.github} or directly by email at ${data.email}.
+
+// [![GitHub followers](https://img.shields.io/github/followers/${data.github}?style=social)](https://github.com/${data.github})
+
+// [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/${data.github}/${data.title})](https://github.com/${data.github}/${data.title}/commits/master)
+
+// ![Profile_pic](${data.picture})
+
+// `;
+// }
+
+// module.exports = generateMarkdown;
 
 
 // After the user has input all employees desired, call the `render` function (required
@@ -196,6 +196,10 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
+// const OUTPUT_DIR = path.resolve(__dirname, "output");
+// const outputPath = path.join(OUTPUT_DIR, "team.html");
+
+const render = require("./lib/htmlRenderer");
 
 const employeeList = [];
 
@@ -274,7 +278,7 @@ async function createEmployeeList() {
 
             const addEmployee = await inquirer.prompt({
                 type: "list",
-                message: "ADD MORE EMPLOYEES?",
+                message: "Would you like to add more employees?",
                 name: "add",
                 choices: [
                     "yes",
@@ -286,8 +290,8 @@ async function createEmployeeList() {
             }
         }
 
-        const finalHTML = await ejs.renderFile("./templates/main.html", { employeeArray });
-        await writeFileAsync("./output/team.html", finalHTML, 'utf-8');
+        // const finalHTML = await ejs.renderFile("./templates/main.html", { employeeList });
+        await writeFileAsync("./output/team.html", render(employeeList), 'utf-8');
     }
 
     catch (err) {
