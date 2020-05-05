@@ -17,4 +17,4 @@ To run tests, npm run test
 ![](Assets/template-engine-app-2.png)
 
 ## Video
-https://drive.google.com/open?id=1-68ZonaRmMSpBpgLSKYNd0BMyT5-cc11
+![](Assets/template-generator.mp4)
