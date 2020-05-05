@@ -11,9 +11,10 @@ To run tests, npm run test
 
 ## Images
 * HTML Ouput
-![](assets/template-engine-app.png)
+![](Assets/template-engine-app.png)
 
 * Node cli application
-![](assets/template-engine-app-2.png)
+![](Assets/template-engine-app-2.png)
 
 ## Video
+https://drive.google.com/open?id=1-68ZonaRmMSpBpgLSKYNd0BMyT5-cc11
